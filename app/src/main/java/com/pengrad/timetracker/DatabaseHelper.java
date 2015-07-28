@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getDb();
         Event lastEvent = getLastEvent(db);
         if (lastEvent != null) {
-            updateEventDuration(lastEvent._id, event.time - lastEvent.time);
+            updateEventDuration(lastEvent._id, event.time - lastEvent.time - lastEvent.duration);
             if (!lastEvent.packageName.equals(event.packageName)) {
                 insertEvent(db, event);
             }
