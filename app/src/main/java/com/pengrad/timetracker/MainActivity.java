@@ -2,10 +2,15 @@ package com.pengrad.timetracker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +20,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ListView listView = (ListView) findViewById(R.id.listview);
-        ArrayAdapter<Event> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, MyApp.getDatabaseHelper(this).getEvents());
+
+        MyApp.getDatabaseHelper(this).aggregateEvents();
+
+        List<Event> events = MyApp.getDatabaseHelper(this).getEventsByDay(new Date());
+
+        Log.d("+++", Arrays.toString(events.toArray()));
+
+        ArrayAdapter<Event> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, events);
         listView.setAdapter(adapter);
     }
 

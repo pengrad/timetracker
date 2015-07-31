@@ -3,6 +3,8 @@ package com.pengrad.timetracker;
 import android.app.Application;
 import android.content.Context;
 
+import com.pengrad.timetracker.db.DatabaseHelper;
+
 /**
  * stas
  * 7/29/15

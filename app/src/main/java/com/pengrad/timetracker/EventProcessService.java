@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.pengrad.timetracker.db.DatabaseHelper;
+
 public class EventProcessService extends IntentService {
 
     private static final String ACTION_PROCESS_EVENT = "com.pengrad.timetracker.action.PROCESS";
