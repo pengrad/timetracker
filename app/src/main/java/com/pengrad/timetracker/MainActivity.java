@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listview);
 
-        MyApp.getDatabaseHelper(this).aggregateEvents();
-
         List<Event> events = MyApp.getDatabaseHelper(this).getEventsByDay(new Date());
 
         Log.d("+++", Arrays.toString(events.toArray()));

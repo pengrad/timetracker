@@ -35,11 +35,15 @@ public class EventProcessService extends IntentService {
     }
 
     private void handleEvent(AccessibilityEvent accEvent) {
-        long time = System.currentTimeMillis() - SystemClock.uptimeMillis() + accEvent.getEventTime();
+        long time = toUtcTime(accEvent.getEventTime());
         String packageName = accEvent.getPackageName().toString();
-        Event event = new Event(packageName, time);
+        EventRaw event = new EventRaw(packageName, time);
 
         DatabaseHelper databaseHelper = MyApp.getDatabaseHelper(this);
         databaseHelper.addEvent(event);
+    }
+
+    private long toUtcTime(long eventTime) {
+        return System.currentTimeMillis() - SystemClock.uptimeMillis() + eventTime;
     }
 }
