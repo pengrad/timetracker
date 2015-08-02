@@ -3,6 +3,7 @@ package com.pengrad.timetracker;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.pengrad.timetracker.db.DatabaseHelper;
@@ -34,8 +35,8 @@ public class EventProcessService extends IntentService {
     }
 
     private void handleEvent(AccessibilityEvent accEvent) {
+        long time = System.currentTimeMillis() - SystemClock.uptimeMillis() + accEvent.getEventTime();
         String packageName = accEvent.getPackageName().toString();
-        long time = accEvent.getEventTime();
         Event event = new Event(packageName, time);
 
         DatabaseHelper databaseHelper = MyApp.getDatabaseHelper(this);
